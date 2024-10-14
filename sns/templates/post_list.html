@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  タイムライン
+{% endblock title %}
+
+{% block content %}
+  <h1>タイムライン</h1>
+  <hr>
+  {% for object in object_list reversed %}
+    <div>
+      {{ object.updated_at }},
+      <a href="#undefined">{{ object.username }}</a>
+    </div>
+    <a href="#undefined">{{ object.text }}</a>
+    <hr>
+  {% endfor %}
+{% endblock content %}
