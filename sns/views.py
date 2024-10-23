@@ -1,23 +1,33 @@
-from django.shortcuts import render
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.views.generic import TemplateView, ListView, CreateView
 
-from django.views.generic import TemplateView
+from .forms import PostForm
+from .models import Post, User
 
-from .models import Post
 
-
+# トップページ
 class TopView(TemplateView):
     template_name = "top.html"
 
-def list_view(request):
-    object_list = Post.objects.all().order_by("updated_at")
-    context = {"object_list": object_list}
-    return render(request, "post_list.html", context)
+# タイムライン
+class TimeLineView(ListView):
+    template_name = "post_list.html"
+    model = Post
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs) 
-    #     context["foo"] = "bar"
-    #     return context
+# 投稿作成
+class CreatePostView(CreateView):
+        model = Post
+        form_class = PostForm
+        template_name = "post_form.html"
+        success_url = reverse_lazy('sns:list')
 
-# def top_view(request):
-#     return render(request, "sns/top.html")
-
+        # 投稿ボタン
+        def post(self, request: HttpRequest, *args: str, **kwargs: reverse_lazy) -> HttpResponse:
+            username = request.user
+            text = request.POST["text"]
+            Post.objects.create(username=username, text=text)
+            return redirect("sns:list")

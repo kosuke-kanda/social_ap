@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
 
-
+{% block title %}
+  ユーザー登録
+{% endblock title %}
 {% block content %}
 
     <h1 class="mt-5">ユーザー登録</h1>
     <div class="card bg-light shadow-sm mt-3">
-    <form method="POST" action="" class="m-3">
-      {% csrf_token %}
-  
-      {{ form.as_p }}
-  
-      <input type="submit" id="save" value="登録">
-    </form>
+      <form method="POST" action="" class="m-3">
+        <table>
+        {% csrf_token %}
+    
+        {{ form.as_table }}
+      </table>
+      <div>
+        <button type="button" onclick="location.href=`{% url 'sns:top' %}`">
+          戻る
+        </button>
+        <input type="submit" id="save" value="登録">
+      </div>
+      </form>
     </div>
 {% endblock %}

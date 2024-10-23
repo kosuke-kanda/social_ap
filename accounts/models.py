@@ -6,18 +6,18 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import UserManager
 
 
-# class User(AbstractUser):
-#     pass
+class User(AbstractUser):
+    pass
 
-class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255, unique=True)
-    password = models.CharField(max_length=20, verbose_name='パスワード', )
+# class User(AbstractBaseUser, PermissionsMixin):
+    # username = models.CharField(max_length=255, unique=True)
+    # email = models.EmailField(max_length=255, unique=True)
+    # password = models.CharField(max_length=20, verbose_name='パスワード' )
 
-    objects = UserManager()
+    # objects = UserManager()
 
-    USERNAME_FIELD = 'email' 
-    REQUIRED_FIELDS = ['username'] 
+    # USERNAME_FIELD = 'username' 
+    # REQUIRED_FIELDS = [] 
 
-    class Meta:
-        db_table = 'users' #テーブル名を指定
+    # class Meta:
+    #     db_table = 'users' #テーブル名を指定

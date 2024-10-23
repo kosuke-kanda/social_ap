@@ -1,18 +1,27 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  タイムライン
+  投稿一覧
 {% endblock title %}
 
 {% block content %}
-  <h1>タイムライン</h1>
-  <hr>
+  <h1>投稿一覧</h1>
+ 
   {% for object in object_list reversed %}
-    <div>
-      {{ object.updated_at }},
-      <a href="#undefined">{{ object.username }}</a>
+  <div class="mt-3">
+    <div class="card">
+      <div class="card-header">
+        {{ object.username }}
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>{{ object.text }}</p>
+        </blockquote>
+      </div>
+      <div class="card-footer text-muted">
+        {{ object.updated_at }}
+      </div>
     </div>
-    <a href="#undefined">{{ object.text }}</a>
-    <hr>
+  </div>
   {% endfor %}
 {% endblock content %}
