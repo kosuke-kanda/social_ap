@@ -8,12 +8,38 @@
     <h1 class="">トップページ</h1>
     <div class="card bg-light shadow-sm mt-3">
 
-      <div class="row p-3">
-        <div class="col-6">
-          <a href="{% url 'accounts:signup' %}">ユーザー新規登録</a>
+      <div class="row p-5">
+        <div class="col-sm-6 p-2">
+          <div class="card">
+            <div class="card-body m-2">
+              <h5 class="card-title">ユーザー新規登録</h5>
+              <ul class="card-text" style="list-style: square;">
+                <li>
+                  ユーザー登録がまだであればこちらから作成してください！
+                </li>
+                <li>
+                  ユーザー名、メールアドレス、パスワードの入力
+                </li>
+              </ul>
+              <a class="btn btn-primary" href="{% url 'accounts:signup' %}">ユーザー新規登録</a>
+            </div>
+          </div>
         </div>
-        <div class="col-6">
-          <a href="{% url 'accounts:login' %}">ログイン</a>
+        <div class="col-sm-6 p-2">
+          <div class="card">
+            <div class="card-body m-2">
+              <h5 class="card-title">ログイン</h5>
+              <ul class="card-text" style="list-style: square;">
+                <li>
+                  ユーザー登録がお済であればこちらからログイン可能です！
+                </li>
+                <li>
+                  ユーザー名、パスワードの入力
+                </li>
+              </ul>
+              <a class="btn btn-primary" href="{% url 'accounts:login' %}">ログイン</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
