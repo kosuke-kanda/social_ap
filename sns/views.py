@@ -20,13 +20,6 @@ class TimeLineView(ListView):
     template_name = "post_list.html"
     model = Post
 
-    # def get(self, request: HttpRequest, *args: reverse_lazy, **kwargs: reverse_lazy) -> HttpResponse:
-    #     context = {
-    #         'username': self.request.user.username
-    #     }
-
-    #     return self.render_to_response(context)
-
 # マイページ
 class UserPageView(LoginRequiredMixin, ListView):
     template_name = "post_user_page.html"
@@ -51,7 +44,6 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('sns:list')
     login_url = reverse_lazy('accounts:login')
 
-    # 投稿ボタン
     def post(self, request: HttpRequest, *args: str, **kwargs) -> HttpResponse:
         username = request.user
         text = request.POST["text"]
@@ -62,8 +54,12 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 # 投稿削除
 class DeltePost(LoginRequiredMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy("sns:top") #TODO:削除完了後パラメータ取得してマイページに戻す 
+    success_url = reverse_lazy("sns:list") #TODO:削除完了後パラメータ取得してマイページに戻す 
     login_url = reverse_lazy('accounts:login')
+
+    def post(self, request: HttpRequest, *args: str, **kwargs) -> HttpResponse:
+        messages.success(request, "投稿を削除しました！")
+        return super().post(request, *args, **kwargs)
 
     # def get_url_success(self):
     #     return reverse_lazy("sns:userPage",kwargs={"username":self.kwargs["username"]} )

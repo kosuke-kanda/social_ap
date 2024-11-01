@@ -7,11 +7,11 @@
 {% block content %}
   {% if messages %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <ul class="messages" style="list-style: none;">
+    
       {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
       {% endfor %}
-    </ul>
+ 
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   {% endif %}
@@ -21,9 +21,12 @@
     <div class="card">
       <div class="card-header">
         <!-- TODO:自分以外のユーザーのページには飛べないようにする -->
-        <a href="{% url 'sns:userPage' object.username %}">
+        <button type="button" class="btn btn-primary" onclick="location.href=`{% url 'sns:userPage' object.username %}`">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+          </svg>&nbsp;
           {{ object.username }}
-        </a>
+        </button>
       </div>
       <div class="card-body">
         <blockquote class="blockquote mb-0">
@@ -36,7 +39,4 @@
     </div>
   </div>
   {% endfor %}
-  <div class="position-relative">
-    <div class="position-absolute top-50 start-100 translate-middle">dd</div>
-  </div>
 {% endblock content %}
